@@ -8,4 +8,9 @@
 ## List 고유 키 - UUID
 
 **[설치]**
+
 `yarn add uuid`
+
+## icons
+
+`yarn add react-icons`
