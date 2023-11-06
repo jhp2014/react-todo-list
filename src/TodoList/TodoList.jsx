@@ -5,7 +5,8 @@ import styles from './TodoList.module.css';
 import { useEffect } from 'react';
 
 export default function TodoList({ filter }) {
-	const [todos, setTodos] = useState(readTodosFromLocalStorage());
+	//콜백함수로 수정하면 useState는 초기값이 필요한 경우에만 함수를 호출하게 된다.
+	const [todos, setTodos] = useState(() => readTodosFromLocalStorage());
 
 	useEffect(() => {
 		localStorage.setItem('todos', JSON.stringify(todos));
