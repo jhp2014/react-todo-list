@@ -3,10 +3,13 @@ import { createContext, useContext, useState } from 'react';
 const DarkModeContext = createContext();
 
 export function DarkModeProvider({ children }) {
-	const [DarkMode, setDarkMode] = useState(false);
-	const toggleDarkMode = () => setDarkMode((prev) => !prev);
+	const [darkMode, setDarkMode] = useState(false);
+	const toggleDarkMode = () => {
+		setDarkMode(!darkMode);
+	};
+
 	return (
-		<DarkModeContext.Provider value={{ DarkMode, toggleDarkMode }}>
+		<DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
 			{children}
 		</DarkModeContext.Provider>
 	);
