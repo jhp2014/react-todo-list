@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import AddTodo from '../AddTodo/AddTodo';
 import Todo from '../Todo/Todo';
 import styles from './TodoList.module.css';
+import { useEffect } from 'react';
 
 export default function TodoList({ filter }) {
-	const [todos, setTodos] = useState([
-		{ id: '123', text: '장보기', status: 'active' },
-		{ id: '124', text: '공부하기', status: 'active' },
-	]);
+	//콜백함수로 수정하면 useState는 초기값이 필요한 경우에만 함수를 호출하게 된다.
+	const [todos, setTodos] = useState(() => readTodosFromLocalStorage());
+
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(todos));
+	}, [todos]);
 
 	const handleAdd = (item) => {
 		setTodos([...todos, item]);
@@ -34,6 +37,11 @@ export default function TodoList({ filter }) {
 			<AddTodo onAdd={handleAdd} />
 		</section>
 	);
+}
+
+function readTodosFromLocalStorage() {
+	const todos = localStorage.getItem('todos');
+	return todos ? JSON.parse(todos) : [];
 }
 
 function getFilteredItems(todos, filter) {
